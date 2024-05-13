@@ -1,4 +1,5 @@
 import MiComponete from "./Components/MiComponete"
+import PruebasCustoms from "./Components/PruebasCustoms"
 
 const App = () => {
 
@@ -7,7 +8,8 @@ const App = () => {
     <>
       <h1>From App Component</h1>
       <hr />
-      <MiComponete />
+      {/* <MiComponete /> */}
+      <PruebasCustoms />
     </>
   )
 }
