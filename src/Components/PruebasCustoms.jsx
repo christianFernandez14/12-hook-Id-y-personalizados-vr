@@ -1,29 +1,39 @@
-import { useState } from "react"
 import { useMayus } from "../hooks/useMayus"
 
 const PruebasCustoms = () => {
 
   // Hacesmos un poco más dinamico el hook, ya que usaremos useState
-  const [texto, setTexto] = useState('Probando La WEB:')
+  const {
+    texto_original,
+    estado,
+    mayusculas,
+    minusculas,
+    concatenar,
+    original
+  } = useMayus('Prueba WEB')
 
-  const { mayusculas, minusculas, concatenar } = useMayus(texto)
+
+
   return (
     <div>
       <h1>Pruebas de Customs Hooks</h1>
 
-      <p>Texto original: {texto} </p>
+      <p>Texto original: {estado} </p>
 
-      {/* Me cree un buttom que me cambia a mayuscula con el evento onClick */}
       <button
-        onClick={e => (
-          setTexto(mayusculas())
-        )}>Mayuscula</button>
+        onClick={original}>Texto Original</button>
+      
+      <button
+        onClick={mayusculas}>Poner en Mayuscula</button>
 
-      {/* Me cree un buttom que me cambia a minuscula con el evento onClick */}
       <button
-        onClick={e => {
-          setTexto(minusculas())
-        }}>Minuscula</button>
+        onClick={minusculas}>Poner en Minuscula</button>
+      
+      <button
+        onClick={() => concatenar('- Me concatena esa frase')}>Concatenar</button>
+        
+      
+        
 
     </div>
   )
