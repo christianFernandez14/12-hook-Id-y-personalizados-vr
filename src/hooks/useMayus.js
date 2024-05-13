@@ -1,13 +1,23 @@
 export const useMayus = (texto) => {
 
-  // Aca puedo diseñar todo tipo de función que se encarge de hacer algo
-  const mayusculas =(valor = '')=>{
-    // Vimos que toma el parametro "texto", pero podemos pasarle otro más interno
-    return (texto + valor).toUpperCase()
+  // En base a lo anterior, podemos hacer una librería de que padamos procesar dentro de este hook
+  const mayusculas = () => {
+    return texto.toUpperCase()
   }
 
-  // Aca vot a retornar cada función que se diseñara
-  return{
-    mayusculas
+  const minusculas = () => {
+    return texto.toLowerCase()
+  }
+
+  const concatenar = (texto2) => {
+
+    return texto + texto2
+  }
+
+  // Aca retorno los 3 metodos para tenerlos a disposición 
+  return {
+    mayusculas,
+    minusculas,
+    concatenar
   }
 }

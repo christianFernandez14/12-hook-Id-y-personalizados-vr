@@ -2,12 +2,17 @@ import { useMayus } from "../hooks/useMayus"
 
 const PruebasCustoms = () => {
 
-  const { mayusculas } = useMayus('probando')
+  // Destructuramos todos los metodos del hook creado
+  const { mayusculas, minusculas, concatenar } = useMayus('Probando La WEB:')
   return (
     <div>
       <h1>Pruebas de Customs Hooks</h1>
-      <p>Texto original: </p>
-      <p>Texto modificado a mayuscula: {mayusculas(' como estas')} </p>
+      
+      {/* Haciendo las pruebas */}
+      <p>Texto original: {'Probando La WEB:'} </p>
+      <p>Usando metodo  mayuscula: <strong>{mayusculas()}</strong> </p>
+      <p>Usando metodo  mminuscula: <strong>{minusculas()}</strong> </p>
+      <p>Usando metodo concatenar: <strong>{concatenar(' www.christian.web')}</strong> </p>
     </div>
   )
 }
