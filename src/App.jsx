@@ -1,3 +1,4 @@
+import Form from "./Components/Form"
 import MiComponete from "./Components/MiComponete"
 import PruebasCustoms from "./Components/PruebasCustoms"
 
@@ -9,7 +10,9 @@ const App = () => {
       <h1>From App Component</h1>
       <hr />
       {/* <MiComponete /> */}
-      <PruebasCustoms />
+      {/* <PruebasCustoms /> */}
+      <Form />
+
     </>
   )
 }
