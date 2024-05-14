@@ -21,3 +21,14 @@
 .mi-formulario input[type='submit']:hover{
   background-color: rgb(25, 177, 25);
 }
+
+.curso{
+  font-size: 10px;
+}
+
+.enviado{
+  background-color: green;
+  color: white;
+  padding: 15px;
+  font-size: 12px;
+}
