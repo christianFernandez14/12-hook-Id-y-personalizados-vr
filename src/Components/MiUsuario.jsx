@@ -1,44 +1,22 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from "react"
+import { useAjax } from "../hooks/useAjax"
 
 const MiUsuario = () => {
 
-  const [usuario, setUsuario] = useState({
-    datos: null
-  })
+  const [url, setUrl] = useState('https://reqres.in/api/users/1')
 
-  const getUsuario = async (url) => {
+  // Hacemos el llamado a nuestro Custom Hook 
+  const {datos, cargando } = useAjax(url)
 
-    setUsuario({
-      ...usuario,
-      cargando: true
-    })
-
-    // Incorporamos la fucnion setTimeout, para ver la ejecucion de Cargando...
-    setTimeout(async () => {
-      const peticion = await fetch(url)
-      const { data } = await peticion.json()
-
-      setUsuario({
-        datos: data,
-        cargando: false
-      })
-    }, 2000)
-  }
-
-
+  // Es el unico metedo que ese queda, ya esta vinculado con el formulario
   const getId = e => {
     let id = parseInt(e.target.value)
-    let url = `https://reqres.in/api/users/${id}`
+    setUrl(`https://reqres.in/api/users/${id}`)
 
-    getUsuario(url)
+
+    return 
 
   }
-
-  // Genero al menos un usuario al cargar la pagina.
-  useEffect(() => {
-    getUsuario('https://reqres.in/api/users/1')
-  }, [])
-
 
   return (
     <div>
@@ -47,13 +25,13 @@ const MiUsuario = () => {
       <input type="number" name='id' onChange={getId} />
       <hr />
       {
-        usuario.cargando
+        cargando
           ? 'Cargando...'
           : (<div>
-            <p>Nombre: {usuario?.datos?.first_name}</p>
-            <p>Apellido: {usuario?.datos?.last_name}</p>
-            <p>Email: {usuario?.datos?.email}</p>
-            <img src={usuario?.datos?.avatar} alt="" />
+            <p>Nombre: {datos?.first_name}</p>
+            <p>Apellido: {datos?.last_name}</p>
+            <p>Email: {datos?.email}</p>
+            <img src={datos?.avatar} alt={`Imagen de ${datos?.first_name}`} />
           </div>)
       }
     </div>
