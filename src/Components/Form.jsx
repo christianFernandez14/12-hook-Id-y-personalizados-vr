@@ -3,6 +3,20 @@ import React, { useState } from 'react'
 const Form = () => {
   const [formulario, setFormulario] = useState({})
 
+  // Recopilamos la información de manera más dinamica
+  const serializarFormulario = (formulario) => {
+    const formData = new FormData(formulario)
+
+    const objetoCompleto = {}
+
+    for (let [name, value] of formData) {
+      objetoCompleto[name] = value
+    }
+
+    return objetoCompleto
+  }
+
+
   const handleSubmit = e => {
     e.preventDefault()
 
@@ -13,6 +27,11 @@ const Form = () => {
       autor: e.target.autor.value,
       email: e.target.email.value
     }
+
+    // Acá demostramos que lo que recogemos del fomrulario es los mismo, de una forma u otra
+    console.log(curso)
+    console.log(serializarFormulario(e.target))
+
 
     setFormulario(curso)
   }
