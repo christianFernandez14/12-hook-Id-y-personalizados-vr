@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const MiUsuario = () => {
 
@@ -6,15 +6,23 @@ const MiUsuario = () => {
     datos: null
   })
 
-  const getUsuario = async(url) =>{
-    const peticion = await fetch(url)
-    const {data} = await peticion.json()
-
-    // console.log(data)
+  const getUsuario = async (url) => {
 
     setUsuario({
-      datos: data
+      ...usuario,
+      cargando: true
     })
+
+    // Incorporamos la fucnion setTimeout, para ver la ejecucion de Cargando...
+    setTimeout(async () => {
+      const peticion = await fetch(url)
+      const { data } = await peticion.json()
+
+      setUsuario({
+        datos: data,
+        cargando: false
+      })
+    }, 2000)
   }
 
 
@@ -26,16 +34,28 @@ const MiUsuario = () => {
 
   }
 
-  // console.log(usuario.datos.avatar)
+  // Genero al menos un usuario al cargar la pagina.
+  useEffect(() => {
+    getUsuario('https://reqres.in/api/users/1')
+  }, [])
+
+
   return (
     <div>
       <h1>Mi usuario:</h1>
       <p>Datos del usuario</p>
       <input type="number" name='id' onChange={getId} />
-      <p>Nombre: {usuario?.datos?.first_name}</p>
-      <p>Apellido: {usuario?.datos?.last_name}</p>
-      <p>Email: {usuario?.datos?.email}</p>
-      <img src={usuario?.datos?.avatar} alt="" />
+      <hr />
+      {
+        usuario.cargando
+          ? 'Cargando...'
+          : (<div>
+            <p>Nombre: {usuario?.datos?.first_name}</p>
+            <p>Apellido: {usuario?.datos?.last_name}</p>
+            <p>Email: {usuario?.datos?.email}</p>
+            <img src={usuario?.datos?.avatar} alt="" />
+          </div>)
+      }
     </div>
   )
 }
